@@ -47,6 +47,7 @@ Refs
 * https://stackoverflow.com/questions/28545545/why-there-is-no-an-exist-keyword-in-haskell-for-existential-quantification
 * https://stackoverflow.com/questions/292274/what-is-an-existential-type
 * http://iveselov.info/posts/2012-08-30-existential-types.html
+* https://downloads.haskell.org/~ghc/5.00/docs/set/existential-quantification.html
 
 Misc
 ====
