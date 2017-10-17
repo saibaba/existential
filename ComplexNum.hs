@@ -1,6 +1,9 @@
 {-# LANGUAGE ExistentialQuantification #-}
 {-# LANGUAGE Rank2Types #-}
 
+module ComplexNum
+(Complex, create, add, im) where
+
 {-
  - Unfolding Abstract Datatypes (Jeremy Gibbons)
  -
@@ -8,11 +11,19 @@
  - In particular each s in  'exists s' for two instances of Complex cannot be coerced even though they both are pair.
  - Hence need to use re/im to retrieve in pairAdd function
  -
+ - data D = exists s. MkD (s, s->Integer)
+ -    introduces a constructor :
+ -        MkD :: (exists s. (s, s->Integer)) -> D
+ -    By DeMorgan's laws, above is isomorphic to (assuming D is independent of s)
+ -        MkD :: forall s. ( (s, s->Integer) -> D )
+ -    So, we could use
+ - data D = forall s . MkD (s, s->Integer)
+ - 
  - Complex could implement Functor typeclass to extract and repackage parts by treating 'Complex' as a container!
  -}
 
 -- ADT
-data Complex = forall s. MkComplex { addfn :: s -> Complex -> s , re :: s->Double, im :: s->Double, self::s }
+data Complex = forall s. MkComplex (s -> Complex -> s) (s->Double) (s->Double) s
 
 instance Show Complex where
   show (MkComplex a r i s) = show (r s) ++ " + i (" ++ show (i s) ++ ")"
@@ -33,14 +44,5 @@ create r i = MkComplex pairAdd pairRe pairIm (r, i)
 
 add (MkComplex a r i s) c = MkComplex a r i (a s c)
 
-isReal :: Complex -> Bool
--- isReal ??what pattern - not allowed ! has to use available operations like re, im ??
-isReal MkComplex{im=i,self=s} = (i s == 0)
-
-test = do
-  add (create 1 2) (create 3 4)
-
-main = do
-  putStrLn "Test complex numbers"
-  print test
-
+im :: Complex -> Double
+im (MkComplex a r i s) = i s
