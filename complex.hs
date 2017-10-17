@@ -17,6 +17,8 @@ data Complex = forall s. MkComplex { addfn :: s -> Complex -> s , re :: s->Doubl
 instance Show Complex where
   show (MkComplex a r i s) = show (r s) ++ " + i (" ++ show (i s) ++ ")"
 
+-- Use pair (s in forall in ADT definition) as "representation" of ADT, Complex.
+
 pairRe :: (Double, Double) -> Double
 pairRe (r, i) = r
 
