@@ -10,7 +10,8 @@ data Complex = forall s. MkComplex (s -> Complex -> s) (s->Double) (s->Double) s
 instance Show Complex where
   show (MkComplex a r i s) = show (r s) ++ " + i (" ++ show (i s) ++ ")"
 
--- Use pair (s in forall in ADT definition) as "representation" of ADT, Complex.
+-- Use a function (s in forall in ADT definition) as "representation" of ADT, Complex
+-- Like this ( ( (\x -> \y -> \b -> if b x else y) real ) imaginary)
 
 lambdaRe = \f -> f True
 lambdaIm = \f -> f False
