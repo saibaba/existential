@@ -1,3 +1,5 @@
+Details
+=======
 
 A note about forall (https://stackoverflow.com/questions/10753073/whats-the-theoretical-basis-for-existential-types/10753957#10753957):
 
@@ -38,6 +40,20 @@ f (MkFoo val fn) = fn val
 
 -----------
 "... encapsulation is a friendly name given to existentially quantified types, which are the underlying theory used to understand Modules.  ..." from http://etymon.blogspot.com.au/2006/04/what-is-object-oriented-programming.html
+
+
+-----------
+
+A note about complex numbers examples:
+
+ Unfolding Abstract Datatypes (Jeremy Gibbons)
+ 
+ A lot to learn from this little exercise.
+ In particular each s in  'exists s' for two instances of Complex cannot be coerced even though they both are pair.
+ Hence need to use re/im to retrieve in pairAdd function
+
+ Complex could implement Functor typeclass to extract and repackage parts by treating 'Complex' as a container!
+
 
 
 Refs
